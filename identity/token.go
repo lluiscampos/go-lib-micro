@@ -1,4 +1,4 @@
-// Copyright 2017 Northern.tech AS
+// Copyright 2019 Northern.tech AS
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -144,6 +144,10 @@ func ExtractIdentityFromHeaders(headers http.Header) (Identity, error) {
 
 	if len(auth) != 2 {
 		return Identity{}, errors.Errorf("malformed authorization data")
+	}
+
+	if auth[0] == "Basic" {
+		return Identity{}, nil
 	}
 
 	if auth[0] != "Bearer" {
